@@ -12,7 +12,7 @@
                             <a href="#"  type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#addVisitorModal"><i class="mdi mdi-plus-thick"></i> Add</a>
                         </div>
 
-                        <h4 class="header-title mb-4">Sales Overview</h4>
+                        <h4 class="header-title mb-4">Visitors</h4>
 
                         <table class="table dataTable table-bordered table-sm mb-0" id="visitorlistings">
                             <thead>
@@ -41,7 +41,7 @@
 <!-- Save Visitor -->
 <form id="saveEmpForm" method="post">
 	<div id="addVisitorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	    <div class="modal-dialog">
+	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <h4 class="modal-title">Add Visitor</h4>
@@ -83,7 +83,7 @@
 <!-- Edit Visitor -->
 <form id="editVisitorForm" method="post">
 	<div id="editVisitorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	    <div class="modal-dialog">
+	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <h4 class="modal-title">Update Visitor</h4>
@@ -117,6 +117,28 @@
 	            	<input type="hidden" name="visitId" id="visitId" class="form-control">
 	                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
 	                <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</form> 
+
+<!-- Delete Visitor -->
+<form id="deleteVisitForm" method="post">
+	<div id="deleteVisitModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title">Delete Visitor</h4>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            </div>
+	            <div class="modal-body p-4" style="text-align: center;">
+	                <h4>Are you sure you want to delete this record?</h4>
+	            </div>
+	            <div class="modal-footer">
+	            	<input type="hidden" name="deleteEmpId" id="deleteEmpId" class="form-control">
+	                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">No</button>
+	                <button type="submit" class="btn btn-danger waves-effect waves-light">Yes</button>
 	            </div>
 	        </div>
 	    </div>

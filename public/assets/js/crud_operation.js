@@ -71,7 +71,7 @@ $(document).ready(function(){
 							'<td>'+data[i].visitor_mobileno+'</td>'+
 							'<td>'+data[i].visitor_address+'</td>'+
 							'<td>'+
-								'<a href="javascript:void(0);" class="btn btn-info btn-sm editRecord" data-id="'+data[i].id+'" data-visitorName="'+data[i].visitor_name+'" data-visitorMobileno="'+data[i].visitor_mobileno+'" data-visitorAddress="'+data[i].visitor_address+'"><i class="mdi mdi-account-edit"></i></a>'+' '+
+								'<a href="javascript:void(0);" class="btn btn-info btn-sm editRecord" data-id="'+data[i].id+'" data-visitor_name="'+data[i].visitor_name+'" data-visitor_mobileno="'+data[i].visitor_mobileno+'" data-visitor_address="'+data[i].visitor_address+'"><i class="mdi mdi-account-edit"></i></a>'+' '+
 								'<a href="javascript:void(0);" class="btn btn-danger btn-sm deleteRecord" data-id="'+data[i].id+'"><i class="mdi mdi-delete"></i></a>'+
 							'</td>'+
 							'</tr>';
@@ -82,8 +82,7 @@ $(document).ready(function(){
 		});
 	}
 
-
-	// show edit modal form with emp data
+	//update visitor
 	$('#vlists').on('click','.editRecord',function(){
 		$('#editVisitorModal').modal('show');
 		$("#visitId").val($(this).data('id'));
@@ -91,29 +90,71 @@ $(document).ready(function(){
 		$("#visitorMobileno").val($(this).data('visitor_mobileno'));
 		$("#visitorAddress").val($(this).data('visitor_address'));
 	});
-	// save edit record
-	 $('#editVisitorForm').on('submit',function(){
+	// save edit data
+	$('#editVisitorForm').on('submit',function(){
 		var visitId = $('#visitId').val();
 		var visitorName = $('#visitorName').val();
 		var visitorMobileno = $('#visitorMobileno').val();
-		var visitorAddress = $('#visitorAddress').val();		
+		var visitorAddress = $('#visitorAddress').val();
 		$.ajax({
 			type : "POST",
 			url  : "visitor/update",
 			dataType : "JSON",
-			data : {visitId:id, visitorName:visitorName, visitorMobileno:visitorMobileno, visitorAddress:visitorAddress},
+			data : {id:visitId, visitor_name:visitorName, visitor_mobileno:visitorMobileno, visitor_address:visitorAddress},
 			success: function(data){
 				$("#visitId").val("");
 				$("#visitorName").val("");
 				$('#visitorMobileno').val("");
 				$("#visitorAddress").val("");
 				$('#editVisitorModal').modal('hide');
-				listEmployee();
+				listVisitors();
 			}
 		});
 		return false;
 	});
 
+	// show delete form
+	$('#vlists').on('click','.deleteRecord',function(){
+		var empId = $(this).data('id');            
+		$('#deleteVisitModal').modal('show');
+		$('#deleteEmpId').val(empId);
+	});
+	// delete emp record
+	$('#deleteVisitForm').on('submit',function(){
+		var empId = $('#deleteEmpId').val();
+		$.ajax({
+			type : "POST",
+			url  : "visitor/delete",
+			dataType : "JSON",  
+			data : {id:empId},
+			success: function(data){
+				$("#"+empId).remove();
+				$('#deleteEmpId').val("");
+				$('#deleteVisitModal').modal('hide');
+
+				toastr["success"]("Record Deleted.");
+
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": false,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+				listVisitors();
+			}
+		});
+		return false;
+	});
 
 });
-

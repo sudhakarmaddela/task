@@ -28,5 +28,10 @@ class Visitor extends CI_Controller {
 		$data = $this->Visitor_model->updateVisitor();
 		echo json_encode($data);
 	}
+
+	function delete(){
+		$data=$this->Visitor_model->deleteVisitor();
+		echo json_encode($data);
+	}
 	
 }
