@@ -30,7 +30,6 @@
 	<link href="http://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" rel="stylesheet" type="text/css" />
 
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/css/bootstrap.css'?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/css/jquery.dataTables.css'?>">
@@ -100,6 +99,12 @@
                                 </a>
                             </li>
 
+                            <li>
+                                <a href="<?php echo base_url();?>Visitor">
+                                    <i class="mdi mdi-account-group-outline"></i>
+                                    <span> Visitors </span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="#sidebarApps" data-toggle="collapse">
                                     <i class="fe-layers"></i>

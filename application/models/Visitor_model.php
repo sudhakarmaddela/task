@@ -25,7 +25,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		public function updateVisitor()
 		{
+			$id = $this->input->post('id');
+			$vistorname = $this->input->post('visitor_name');
+			$vistormobileno = $this->input->post('visitor_mobileno');
+			$vistoraddress = $this->input->post('visitor_address');
 
+			$this->db->set('visitor_name',$vistorname);
+			$this->db->set('visitor_mobileno',$vistormobileno);
+			$this->db->set('visitor_address',$vistoraddress);
+			$this->db->where('id',$id);
+			$result = $this->db->update('visitor');
+			return $result;
 		}
 	}
 }

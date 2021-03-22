@@ -71,7 +71,7 @@ $(document).ready(function(){
 							'<td>'+data[i].visitor_mobileno+'</td>'+
 							'<td>'+data[i].visitor_address+'</td>'+
 							'<td>'+
-								'<a href="javascript:void(0);" class="btn btn-info btn-sm editRecord" data-id="'+data[i].id+'" data-name="'+data[i].name+'" data-age="'+data[i].age+'" data-skills="'+data[i].skills+'" data-designation="'+data[i].designation+'" data-address="'+data[i].address+'"><i class="mdi mdi-account-edit"></i></a>'+' '+
+								'<a href="javascript:void(0);" class="btn btn-info btn-sm editRecord" data-id="'+data[i].id+'" data-visitorName="'+data[i].visitor_name+'" data-visitorMobileno="'+data[i].visitor_mobileno+'" data-visitorAddress="'+data[i].visitor_address+'"><i class="mdi mdi-account-edit"></i></a>'+' '+
 								'<a href="javascript:void(0);" class="btn btn-danger btn-sm deleteRecord" data-id="'+data[i].id+'"><i class="mdi mdi-delete"></i></a>'+
 							'</td>'+
 							'</tr>';
@@ -81,6 +81,39 @@ $(document).ready(function(){
 			}
 		});
 	}
+
+
+	// show edit modal form with emp data
+	$('#vlists').on('click','.editRecord',function(){
+		$('#editVisitorModal').modal('show');
+		$("#visitId").val($(this).data('id'));
+		$("#visitorName").val($(this).data('visitor_name'));
+		$("#visitorMobileno").val($(this).data('visitor_mobileno'));
+		$("#visitorAddress").val($(this).data('visitor_address'));
+	});
+	// save edit record
+	 $('#editVisitorForm').on('submit',function(){
+		var visitId = $('#visitId').val();
+		var visitorName = $('#visitorName').val();
+		var visitorMobileno = $('#visitorMobileno').val();
+		var visitorAddress = $('#visitorAddress').val();		
+		$.ajax({
+			type : "POST",
+			url  : "visitor/update",
+			dataType : "JSON",
+			data : {visitId:id, visitorName:visitorName, visitorMobileno:visitorMobileno, visitorAddress:visitorAddress},
+			success: function(data){
+				$("#visitId").val("");
+				$("#visitorName").val("");
+				$('#visitorMobileno').val("");
+				$("#visitorAddress").val("");
+				$('#editVisitorModal').modal('hide');
+				listEmployee();
+			}
+		});
+		return false;
+	});
+
 
 });
 
