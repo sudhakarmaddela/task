@@ -107,6 +107,26 @@ $(document).ready(function(){
 				$('#visitorMobileno').val("");
 				$("#visitorAddress").val("");
 				$('#editVisitorModal').modal('hide');
+
+				toastr["success"]("Data Updated Successfully.")
+
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": false,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
 				listVisitors();
 			}
 		});
@@ -117,11 +137,11 @@ $(document).ready(function(){
 	$('#vlists').on('click','.deleteRecord',function(){
 		var empId = $(this).data('id');            
 		$('#deleteVisitModal').modal('show');
-		$('#deleteEmpId').val(empId);
+		$('#deleteVId').val(empId);
 	});
 	// delete emp record
 	$('#deleteVisitForm').on('submit',function(){
-		var empId = $('#deleteEmpId').val();
+		var empId = $('#deleteVId').val();
 		$.ajax({
 			type : "POST",
 			url  : "visitor/delete",
@@ -129,7 +149,7 @@ $(document).ready(function(){
 			data : {id:empId},
 			success: function(data){
 				$("#"+empId).remove();
-				$('#deleteEmpId').val("");
+				$('#deleteVId').val("");
 				$('#deleteVisitModal').modal('hide');
 
 				toastr["success"]("Record Deleted.");
